@@ -4,7 +4,8 @@
         <div class="mx-auto w-8/12 font-black content-center">
             <div class="flex flex-row flex-auto ">
                 <div class="text-8xl title md:rounded-b-md mb-12 text-center mx-auto"
-                     style="font-family: 'Raleway', sans-serif !important;"> Well Of Screams</div>
+                     style="font-family: 'Raleway', sans-serif !important;"> Well Of Screams
+                </div>
             </div>
             <div class="flex flex-row mb-5 w-1/4 mx-auto">
                 <inertia-link :href="route('login')"

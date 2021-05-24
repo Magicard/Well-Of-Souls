@@ -1,7 +1,9 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <inertia-link href="/" class="text-8xl title md:rounded-b-md mb-12 text-center mx-auto"
+                          style="font-family: 'Raleway', sans-serif !important;"> Well Of Screams
+            </inertia-link>
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -20,10 +22,11 @@
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4
+                    border-b-4 border-red-700 hover:border-red-500 rounded-full text-center ml-auto mt-5">
+                <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
-                </jet-button>
+                </button>
             </div>
         </form>
     </jet-authentication-card>

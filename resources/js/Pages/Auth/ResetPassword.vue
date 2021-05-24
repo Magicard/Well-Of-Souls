@@ -1,7 +1,9 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <inertia-link href="/" class="text-8xl title md:rounded-b-md mb-12 text-center mx-auto"
+                          style="font-family: 'Raleway', sans-serif !important;"> Well Of Screams
+            </inertia-link>
         </template>
 
         <jet-validation-errors class="mb-4" />
