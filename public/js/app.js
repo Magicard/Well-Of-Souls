@@ -17933,7 +17933,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitPost: function submitPost() {
-      axios.post('/posts', this.post);
+      axios.post('/posts', this.post).then(this.getPosts);
     }
   },
   mounted: function mounted() {
@@ -21788,10 +21788,10 @@ var _hoisted_1 = {
   "class": "py-12"
 };
 var _hoisted_2 = {
-  "class": "max-w-4xl mx-auto sm:px-6 lg:px-8 h-32"
+  "class": "max-w-4xl mx-auto sm:px-6 lg:px-8 overflow-auto"
 };
 var _hoisted_3 = {
-  "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg"
+  "class": "bg-white shadow-xl sm:rounded-lg py-6 my-6"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
@@ -21799,18 +21799,26 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   style: {
     "font-family": "'Raleway', sans-serif !important"
   }
-}, " Screams ", -1
+}, " The Well ", -1
 /* HOISTED */
 );
 
 var _hoisted_5 = {
-  "class": "flex flex-row my-3"
+  "class": "flex flex-row my-3 "
 };
-var _hoisted_6 = {
-  "class": "flex flex-row"
-};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fa fa-refresh"
+}, null, -1
+/* HOISTED */
+);
+
 var _hoisted_7 = {
-  "class": "overflow-auto mb-12"
+  "class": "overflow-auto mb-12",
+  id: "posts",
+  style: {
+    "max-height": "25rem"
+  }
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_post = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("post");
@@ -21820,23 +21828,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("body", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        "class": "bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-green-700 hover:border-green-500 rounded-full text-center ml-auto mr-1 flex-row text-black",
+        "class": "bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black",
         onClick: _cache[1] || (_cache[1] = function () {
-          return $options.submitPost && $options.submitPost.apply($options, arguments);
-        })
-      }, " New Scream "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        "class": "bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center mr-auto ml-1 flex-row text-black",
-        onClick: _cache[2] || (_cache[2] = function () {
           return $options.getPosts && $options.getPosts.apply($options, arguments);
         })
-      }, " Refresh "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      }, [_hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.post.content = $event;
         }),
-        type: "text"
+        type: "text",
+        "class": "rounded-full border-gray-300 text-center ml-1 mr-1 w-1/3"
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.post.content]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.posts, function (post) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.post.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-green-700 hover:border-green-500 rounded-full text-center mr-auto text-black",
+        onClick: _cache[3] || (_cache[3] = function () {
+          return $options.submitPost && $options.submitPost.apply($options, arguments);
+        })
+      }, " Scream! ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.posts, function (post) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_post, {
           post: post,
           key: post.id

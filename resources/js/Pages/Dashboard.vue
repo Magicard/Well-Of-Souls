@@ -1,30 +1,28 @@
 <template>
     <app-layout>
         <div class="py-12">
-            <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 h-32">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <body>
+            <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 overflow-auto" >
+                <div class="bg-white shadow-xl sm:rounded-lg py-6 my-6" >
+                    <body  >
                         <div class="text-8xl title md:rounded-b-md mt-6 text-center mx-auto"
-                             style="font-family: 'Raleway', sans-serif !important;"> Screams
+                             style="font-family: 'Raleway', sans-serif !important;"> The Well
                         </div>
-                        <div class="flex flex-row my-3">
-                            <button class="bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4
-                                    border-b-4 border-green-700 hover:border-green-500 rounded-full text-center ml-auto mr-1 flex-row text-black"
-                                    @click="submitPost">
-                                    New Scream
-                            </button>
+
+                        <div class="flex flex-row my-3 ">
                             <button class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4
-                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center mr-auto ml-1 flex-row text-black"
+                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black"
                                     @click="getPosts">
-                                    Refresh
+                                <i class="fa fa-refresh"></i>
                             </button>
-                            <div class="flex flex-row">
-                                <input v-model="post.content" type="text">
-                            </div>
-
+                            <input v-model="post.content" type="text" class="rounded-full border-gray-300 text-center ml-1 mr-1 w-1/3">
+                            <button class="bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4
+                                    border-b-4 border-green-700 hover:border-green-500 rounded-full text-center mr-auto text-black"
+                                    @click="submitPost">
+                                    Scream!
+                            </button>
                         </div>
 
-                        <div class="overflow-auto mb-12">
+                        <div class="overflow-auto mb-12" id="posts" style="max-height: 25rem;">
                             <post v-for="post in posts" :post="post" :key="post.id"></post>
                         </div>
 
@@ -41,7 +39,6 @@
     import Welcome from '@/Jetstream/Welcome'
     import Post from "../Post";
     import Input from "../Jetstream/Input";
-
     export default {
         components: {
             Input,
@@ -64,7 +61,7 @@
                 })
             },
             submitPost(){
-                axios.post('/posts', this.post);
+                axios.post('/posts', this.post).then(this.getPosts);
             }
         },
         mounted(){
