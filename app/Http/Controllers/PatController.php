@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePost;
-use App\Http\Resources\PostResource;
+use App\Models\Pat;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class PatController extends Controller
 {
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return PostResource::collection(Post::all());
+        //
     }
 
     /**
@@ -28,27 +30,27 @@ class PostController extends Controller
     }
 
     /**
-     * @param  StorePost  $request
-     * @return PostResource
-     * Using request validation e.g. StorePost
+     * @param  Request  $request
+     * @return Pat
      */
-    public function store(StorePost $request)
+    public function store(Request $request)
     {
-        $post = new Post();
-        $post->user_id = auth()->user()->id;
-        $post->content = $request->get('content');
-        $post->save();
+        $pat = new Pat();
+        $pat->target_type = $request->get('target_type') === 'post' ? Post::class : User::class;
+        $pat->target_id = $request->get('target_id');
+        $pat->user_id = auth()->user()->getKey();
+        $pat->save();
 
-        return new PostResource($post->fresh());
+        return $pat;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Pat  $pat
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Pat $pat)
     {
         //
     }
@@ -56,10 +58,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Pat  $pat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Pat $pat)
     {
         //
     }
@@ -68,10 +70,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Pat  $pat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Pat $pat)
     {
         //
     }
@@ -79,10 +81,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Pat  $pat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Pat $pat)
     {
         //
     }

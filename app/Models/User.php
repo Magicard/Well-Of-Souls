@@ -58,4 +58,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function posts(){
+        // hasMany assumes that there's a table called "posts", that contains a "user_id" column
+        return $this->hasMany(Post::class);
+    }
+
+    public function pats(){
+        return $this->morphMany(Pat::class, 'target');
+    }
+
 }
