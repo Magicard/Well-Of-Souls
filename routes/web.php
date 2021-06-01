@@ -37,6 +37,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('posts', \App\Http\Controllers\PostController::class);
     Route::resource('pat', \App\Http\Controllers\PatController::class);
 
+    Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'imageUpload'])->name('name');
+    Route::get('/upload', [\App\Http\Controllers\ImageController::class, 'imageUpload']);
+
     Route::get('/u/{user}', [\App\Http\Controllers\UserController::class, 'showProfile'])->name('user');
     Route::get('/u/{user}/{post}', [\App\Http\Controllers\UserController::class, 'showPost'])->name('post');
 

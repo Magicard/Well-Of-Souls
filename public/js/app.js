@@ -17901,23 +17901,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
-/* harmony import */ var _Post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Post */ "./resources/js/Post.vue");
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
+/* harmony import */ var _Post__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Post */ "./resources/js/Post.vue");
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+
+var uploadbtn = document.getElementById('upload-btn');
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__.default,
-    Post: _Post__WEBPACK_IMPORTED_MODULE_2__.default,
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
-    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__.default
+    Label: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_0__.default,
+    Button: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_5__.default,
+    Input: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__.default,
+    Post: _Post__WEBPACK_IMPORTED_MODULE_3__.default,
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__.default,
+    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__.default
   },
   data: function data() {
     return {
+      photo: null,
+      photoname: null,
       post: {
         content: null
       },
@@ -17943,6 +17952,18 @@ __webpack_require__.r(__webpack_exports__);
         _this2.posts.push(rsp.data.data);
       })["catch"](function (err) {
         _this2.errors = err.response.data.errors;
+      });
+    },
+    selectImage: function selectImage(event) {
+      this.photo = event.target.files[0];
+      this.photoname = event.target.files[0].name;
+      this.uploadImage();
+    },
+    uploadImage: function uploadImage() {
+      var data = new FormData();
+      data.append('image', this.photo);
+      axios.post('/upload', data).then(function (response) {
+        console.log(response.data);
       });
     }
   },
@@ -21877,9 +21898,10 @@ var _hoisted_5 = {
   "class": "flex flex-row my-3 "
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fa fa-refresh"
-}, null, -1
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "class": "bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black",
+  "for": "upload-btn"
+}, " + ", -1
 /* HOISTED */
 );
 
@@ -21901,20 +21923,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        "class": "bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black",
-        onClick: _cache[1] || (_cache[1] = function () {
-          return $options.getPosts && $options.getPosts.apply($options, arguments);
-        })
-      }, [_hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+        type: "file",
+        id: "upload-btn",
+        onChange: _cache[1] || (_cache[1] = function () {
+          return $options.selectImage && $options.selectImage.apply($options, arguments);
+        }),
+        name: "img",
+        hidden: ""
+      }, null, 32
+      /* HYDRATE_EVENTS */
+      ), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.post.content = $event;
         }),
         type: "text",
+        id: "textbar",
+        placeholder: $data.photoname,
         "class": "rounded-full border-gray-300 text-center ml-1 mr-1 w-1/3"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.post.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      }, null, 8
+      /* PROPS */
+      , ["placeholder"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.post.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4\n                                    border-b-4 border-green-700 hover:border-green-500 rounded-full text-center mr-auto text-black",
         onClick: _cache[3] || (_cache[3] = function () {
           return $options.submitPost && $options.submitPost.apply($options, arguments);

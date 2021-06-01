@@ -9,12 +9,12 @@
                     </div>
 
                     <div class="flex flex-row my-3 ">
-                        <button class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4
-                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black"
-                                @click="getPosts">
-                            <i class="fa fa-refresh"></i>
-                        </button>
-                        <input v-model="post.content" type="text"
+                        <input type="file" id="upload-btn" @change="selectImage" name="img" hidden>
+                        <label class="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4
+                                    border-b-4 border-blue-700 hover:border-blue-500 rounded-full text-center ml-auto text-black" for="upload-btn">
+                            +
+                        </label>
+                        <input v-model="post.content" type="text" id="textbar" :placeholder="photoname"
                                class="rounded-full border-gray-300 text-center ml-1 mr-1 w-1/3">
                         <button class="bg-green-400 hover:bg-green-300 text-white font-bold py-2 px-4
                                     border-b-4 border-green-700 hover:border-green-500 rounded-full text-center mr-auto text-black"
@@ -42,13 +42,19 @@
 </template>
 
 <script>
+import Label from "../Jetstream/Label";
+const uploadbtn= document.getElementById('upload-btn');
+
 import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
 import Post from "../Post";
 import Input from "../Jetstream/Input";
+import Button from "../Jetstream/Button";
 
 export default {
     components: {
+        Label,
+        Button,
         Input,
         Post,
         AppLayout,
@@ -56,6 +62,8 @@ export default {
     },
     data() {
         return {
+            photo: null,
+            photoname: null,
             post: {
                 content: null
             },
@@ -80,7 +88,20 @@ export default {
                 .catch((err) => {
                     this.errors = err.response.data.errors
                 });
-        }
+        },
+        selectImage(event){
+            this.photo= event.target.files[0];
+            this.photoname= event.target.files[0].name;
+            this.uploadImage();
+        },
+
+        uploadImage(){
+            let data= new FormData();
+            data.append('image', this.photo);
+            axios.post('/upload', data).then(function (response) {
+                console.log(response.data);
+            });
+        },
     },
     mounted() {
         this.getPosts();
